@@ -1,0 +1,24 @@
+Instalar o dotnet-ef
+    dotnet tool install --global dotnet-ef --version 7.0.0-*
+
+Criar migrations
+    dotnet ef migrations add CriarEntidadeUsuario
+
+Executar migrations
+    dotnet ef database update
+
+
+Passo a passo de como criar uma entidade
+    1o Criar o modelo
+    2o Criar o mapeamento
+    3o Contrato ou DTO
+    4o Adicionar mapeamento no applicationContext
+    5o Criar a migration da nova CriarEntidadeUsuario
+    6o Executar migrations
+
+Criando o CRUD:
+
+1o Modelo /  (ok)
+2o Repositório
+3o Serviço
+4o Controller

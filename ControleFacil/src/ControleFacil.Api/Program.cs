@@ -1,5 +1,12 @@
 using System.Text;
 using AutoMapper;
+using ControleFacil.Api.AutoMapper;
+//using ControleFacil.Api.Contract.NaturezaDeLancamento;
+using ControleFacil.Api.Domain.Repository.Classes;
+using ControleFacil.Api.Domain.Repository.Interfaces;
+using ControleFacil.Api.Domain.Services.Classes;
+using ControleFacil.Api.Domain.Services.Interfaces;
+using ControleFacil.Api.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -22,24 +29,24 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
 {
     string? connectionString = builder.Configuration.GetConnectionString("PADRAO");
     
-   // builder.Services.AddDbContext<ApplicationContext>(options =>
-    //    options.UseNpgsql(connectionString), ServiceLifetime.Transient, ServiceLifetime.Transient);
+   builder.Services.AddDbContext<ApplicationContext>(options =>
+        options.UseNpgsql(connectionString), ServiceLifetime.Transient, ServiceLifetime.Transient);
 
-    //var config = new MapperConfiguration(cfg => {
-        // cfg.AddProfile<UsuarioProfile>();
+    var config = new MapperConfiguration(cfg => {
+        cfg.AddProfile<UsuarioProfile>();
         // cfg.AddProfile<NaturezaDeLancamentoProfile>();
         // cfg.AddProfile<ApagarProfile>();
         // cfg.AddProfile<AreceberProfile>();
-    //});
+    });
 
-    //IMapper mapper = config.CreateMapper();
+    IMapper mapper = config.CreateMapper();
 
     builder.Services
     .AddSingleton(builder.Configuration)
-    .AddSingleton(builder.Environment);
-    //.AddSingleton(mapper)
+    .AddSingleton(builder.Environment)
+    .AddSingleton(mapper)
     // .AddScoped<TokenService>()
-    // .AddScoped<IUsuarioRepository, UsuarioRepository>()
+    .AddScoped<IUsuarioRepository, UsuarioRepository>();
     // .AddScoped<IUsuarioService, UsuarioService>()
     // .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>()
     // .AddScoped<IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long>, NaturezaDeLancamentoService>()
