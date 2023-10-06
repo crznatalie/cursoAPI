@@ -12,11 +12,14 @@ namespace ControleFacil.Api.Data
     {
         public DbSet<Usuario> Usuario { get; set; }
 
+        public DbSet<NaturezaDeLancamento> NaturezaDeLancamento { get; set; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) {}
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             modelbuilder.ApplyConfiguration(new UsuarioMap());
+            modelbuilder.ApplyConfiguration(new NaturezaDeLancamentoMap());
         }
     }
 }

@@ -1,7 +1,7 @@
 using System.Text;
 using AutoMapper;
 using ControleFacil.Api.AutoMapper;
-//using ControleFacil.Api.Contract.NaturezaDeLancamento;
+using ControleFacil.Api.Contract.NaturezaDeLancamento;
 using ControleFacil.Api.Domain.Repository.Classes;
 using ControleFacil.Api.Domain.Repository.Interfaces;
 using ControleFacil.Api.Domain.Services.Classes;
@@ -34,7 +34,7 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
 
     var config = new MapperConfiguration(cfg => {
         cfg.AddProfile<UsuarioProfile>();
-        // cfg.AddProfile<NaturezaDeLancamentoProfile>();
+        cfg.AddProfile<NaturezaDeLancamentoProfile>();
         // cfg.AddProfile<ApagarProfile>();
         // cfg.AddProfile<AreceberProfile>();
     });
@@ -47,9 +47,9 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddSingleton(mapper)
     .AddScoped<TokenService>()
     .AddScoped<IUsuarioRepository, UsuarioRepository>()
-    .AddScoped<IUsuarioService, UsuarioService>();
-    // .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>()
-    // .AddScoped<IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long>, NaturezaDeLancamentoService>()
+    .AddScoped<IUsuarioService, UsuarioService>()
+    .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>();
+    //.AddScoped<IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long>, NaturezaDeLancamentoService>();
     // .AddScoped<IApagarRepository, ApagarRepository>()
     // .AddScoped<IService<ApagarRequestContract, ApagarResponseContract, long>, ApagarService>()
     // .AddScoped<IAreceberRepository, AreceberRepository>()

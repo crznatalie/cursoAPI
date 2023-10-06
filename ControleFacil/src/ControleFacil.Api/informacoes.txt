@@ -22,3 +22,5 @@ Criando o CRUD:
 2o Repositório
 3o Serviço
 4o Controller
+
+dotnet ef migrations add CriarEntidadeNaturezaDeLancamento
