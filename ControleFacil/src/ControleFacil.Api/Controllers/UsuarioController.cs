@@ -12,16 +12,38 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControleFacil.Api.Controllers
 {
+    [ApiController]
+    [Route("usuarios")]
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
+
         public UsuarioController(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
         }
 
         [HttpPost]
+        [Route("login")]
         [AllowAnonymous]
+        public async Task<IActionResult> Autenticar(UsuarioLoginRequestContract contrato) 
+        {
+            try
+            {
+                return Ok(await _usuarioService.Autenticar(contrato));
+            }
+            catch (AuthenticationException ex)
+            {
+                return Unauthorized(new {statusCode = 401, message = ex.Message});
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Adicionar(UsuarioRequestContract contrato) 
         {
             try
@@ -50,7 +72,7 @@ namespace ControleFacil.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> Obter(long id) 
         {
             try
@@ -65,7 +87,7 @@ namespace ControleFacil.Api.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> Atualizar(long id, UsuarioRequestContract contrato) 
         {
             try
@@ -80,7 +102,7 @@ namespace ControleFacil.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> Deletar(long id) 
         {
             try

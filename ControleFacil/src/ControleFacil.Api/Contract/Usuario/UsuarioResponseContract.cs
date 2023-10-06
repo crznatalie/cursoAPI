@@ -9,6 +9,6 @@ namespace ControleFacil.Api.Contract.Usuario
     {
         public long Id { get; set; } 
 
-        public long DataCadastro { get; set; } 
+        public DateTime DataCadastro { get; set; } 
     }
 }

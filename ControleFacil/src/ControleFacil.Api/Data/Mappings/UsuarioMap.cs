@@ -22,7 +22,7 @@ namespace ControleFacil.Api.Data.Mappings
             builder.Property(p => p.Senha)
             .HasColumnType("VARCHAR")
             .IsRequired();
-
+            
             builder.Property(p => p.DataCadastro)
             .HasColumnType("timestamp")
             .IsRequired();

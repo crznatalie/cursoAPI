@@ -19,15 +19,18 @@ namespace ControleFacil.Api.Domain.Services.Classes
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IMapper _mapper;
+        private readonly TokenService _tokenService;
 
         
 
         public UsuarioService(
             IUsuarioRepository usuarioRepository,
-            IMapper mapper)
+            IMapper mapper,
+            TokenService tokenService)
         {
             _usuarioRepository = usuarioRepository;
             _mapper = mapper;
+            _tokenService = tokenService;
         }
 
         public async Task<UsuarioLoginResponseContract> Autenticar(UsuarioLoginRequestContract usuarioLoginRequest)
@@ -44,7 +47,7 @@ namespace ControleFacil.Api.Domain.Services.Classes
             return new UsuarioLoginResponseContract {
                 Id = usuario.Id,
                 Email = usuario.Email,
-                //Token = _tokenService.GerarToken(_mapper.Map<Usuario>(usuario))
+                Token = _tokenService.GerarToken(_mapper.Map<Usuario>(usuario))
             };        
         }
         public async Task<UsuarioResponseContract> Adicionar(UsuarioRequestContract entidade, long idUsuario)
@@ -74,14 +77,14 @@ namespace ControleFacil.Api.Domain.Services.Classes
 
         public async Task Inativar(long id, long idUsuario)
         {
-            var usuario = await Obter(id) ?? throw new Exception("Usuario não encontrado para inativação.");
+            var usuario = await _usuarioRepository.Obter(id) ?? throw new Exception("Usuario não encontrado para inativação.");
             await _usuarioRepository.Deletar(_mapper.Map<Usuario>(usuario));
         }
 
         public async Task<IEnumerable<UsuarioResponseContract>> Obter(long idUsuario)
         {
             var usuarios = await _usuarioRepository.Obter();
-            return usuarios.Select(usuario => _mapper.Map<UsuarioResponseContract>(usuario));
+            return usuarios.Select(usuario =>_mapper.Map<UsuarioResponseContract>(usuario));
         }
 
         public async Task<UsuarioResponseContract> Obter(long id, long idUsuario)
