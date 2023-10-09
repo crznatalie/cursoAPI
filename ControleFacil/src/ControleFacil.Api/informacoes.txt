@@ -24,3 +24,4 @@ Criando o CRUD:
 4o Controller
 
 dotnet ef migrations add CriarEntidadeNaturezaDeLancamento
+dotnet ef migrations add CriarEntidadeApagar
