@@ -3,6 +3,7 @@ using System;
 using ControleFacil.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ControleFacil.Api.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20231009185714_CriarEntidadeAreceber")]
+    partial class CriarEntidadeAreceber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace ControleFacil.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ControleFacil.Api.Domain.Models.Apagar", b =>
+            modelBuilder.Entity("ControleFacil.Api.Domain.Models.Areceber", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +73,7 @@ namespace ControleFacil.Api.Migrations
 
                     b.HasIndex("idNaturezaDeLancamento");
 
-                    b.ToTable("apagar", (string)null);
+                    b.ToTable("areceber", (string)null);
                 });
 
             modelBuilder.Entity("ControleFacil.Api.Domain.Models.Areceber", b =>
@@ -182,7 +185,7 @@ namespace ControleFacil.Api.Migrations
                     b.ToTable("usuario", (string)null);
                 });
 
-            modelBuilder.Entity("ControleFacil.Api.Domain.Models.Apagar", b =>
+            modelBuilder.Entity("ControleFacil.Api.Domain.Models.Areceber", b =>
                 {
                     b.HasOne("ControleFacil.Api.Domain.Models.Usuario", "Usuario")
                         .WithMany()

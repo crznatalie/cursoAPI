@@ -3,6 +3,7 @@ using AutoMapper;
 using ControleFacil.Api.AutoMapper;
 using ControleFacil.Api.Contract.NaturezaDeLancamento;
 using ControleFacil.Api.Contract.Apagar;
+using ControleFacil.Api.Contract.Areceber;
 using ControleFacil.Api.Domain.Repository.Classes;
 using ControleFacil.Api.Domain.Repository.Interfaces;
 using ControleFacil.Api.Domain.Services.Classes;
@@ -36,8 +37,8 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     var config = new MapperConfiguration(cfg => {
         cfg.AddProfile<UsuarioProfile>();
         cfg.AddProfile<NaturezaDeLancamentoProfile>();
-        // cfg.AddProfile<ApagarProfile>();
-        // cfg.AddProfile<AreceberProfile>();
+        cfg.AddProfile<ApagarProfile>();
+        cfg.AddProfile<AreceberProfile>();
     });
 
     IMapper mapper = config.CreateMapper();
@@ -52,9 +53,9 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>()
     .AddScoped<IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long>, NaturezaDeLancamentoService>()
     .AddScoped<IApagarRepository, ApagarRepository>()
-    .AddScoped<IService<ApagarRequestContract, ApagarResponseContract, long>, ApagarService>();
-    // .AddScoped<IAreceberRepository, AreceberRepository>()
-    // .AddScoped<IService<AreceberRequestContract, AreceberResponseContract, long>, AreceberService>();
+    .AddScoped<IService<ApagarRequestContract, ApagarResponseContract, long>, ApagarService>()
+    .AddScoped<IAreceberRepository, AreceberRepository>()
+    .AddScoped<IService<AreceberRequestContract, AreceberResponseContract, long>, AreceberService>();
 };
 
 // Configura o serviços da API.
