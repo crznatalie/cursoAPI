@@ -8,19 +8,31 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ControleFacil.Api.Data.Mappings
 {
-    public class NaturezaDeLancamentoMap : IEntityTypeConfiguration<NaturezaDeLancamento>
+    public class ApagarMap : IEntityTypeConfiguration<Apagar>
     {
-        public void Configure(EntityTypeBuilder<NaturezaDeLancamento> builder)
+        public void Configure(EntityTypeBuilder<Apagar> builder)
         {
-            builder.ToTable("naturezadelancamento")
+            builder.ToTable("apagar")
             .HasKey(p => p.Id);
 
             builder.HasOne(p => p.Usuario)
             .WithMany()
             .HasForeignKey(fk => fk.IdUsuario);
 
+            builder.HasOne(p => p.NaturezaDeLancamento)
+            .WithMany()
+            .HasForeignKey(fk => fk.idNaturezaDeLancamento);
+
             builder.Property(p => p.Descricao)
             .HasColumnType("VARCHAR")
+            .IsRequired();
+
+            builder.Property(p => p.ValorInicial)
+            .HasColumnType("double precision")
+            .IsRequired();
+
+            builder.Property(p => p.ValorPago)
+            .HasColumnType("double precision")
             .IsRequired();
 
             builder.Property(p => p.Observacao)
@@ -29,6 +41,16 @@ namespace ControleFacil.Api.Data.Mappings
             builder.Property(p => p.DataCadastro)
             .HasColumnType("timestamp")
             .IsRequired();
+
+            builder.Property(p => p.DataVencimento)
+            .HasColumnType("timestamp")
+            .IsRequired();
+
+            builder.Property(p => p.DataReferencia)
+            .HasColumnType("timestamp");
+
+            builder.Property(p => p.DataPagamento)
+            .HasColumnType("timestamp");
 
             builder.Property(p => p.DataInativacao)
             .HasColumnType("timestamp");

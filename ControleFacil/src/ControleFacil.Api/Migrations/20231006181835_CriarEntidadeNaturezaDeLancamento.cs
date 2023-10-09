@@ -13,7 +13,7 @@ namespace ControleFacil.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "NaturezaDeLancamento",
+                name: "naturezadelancamento",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -26,9 +26,9 @@ namespace ControleFacil.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NaturezaDeLancamento", x => x.Id);
+                    table.PrimaryKey("PK_naturezadelancamento", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_NaturezaDeLancamento_usuario_IdUsuario",
+                        name: "FK_naturezadelancamento_usuario_IdUsuario",
                         column: x => x.IdUsuario,
                         principalTable: "usuario",
                         principalColumn: "Id",
@@ -36,8 +36,8 @@ namespace ControleFacil.Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_NaturezaDeLancamento_IdUsuario",
-                table: "NaturezaDeLancamento",
+                name: "IX_naturezadelancamento_IdUsuario",
+                table: "naturezadelancamento",
                 column: "IdUsuario");
         }
 
@@ -45,7 +45,7 @@ namespace ControleFacil.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "NaturezaDeLancamento");
+                name: "naturezadelancamento");
         }
     }
 }

@@ -53,7 +53,7 @@ namespace ControleFacil.Api.Migrations
 
                     b.HasIndex("IdUsuario");
 
-                    b.ToTable("NaturezaDeLancamento", (string)null);
+                    b.ToTable("naturezadelancamento", (string)null);
                 });
 
             modelBuilder.Entity("ControleFacil.Api.Domain.Models.Usuario", b =>
